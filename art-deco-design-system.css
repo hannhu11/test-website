@@ -19,16 +19,64 @@
   --shadow-dark: 0 8px 32px rgba(11, 12, 16, 0.5);
 }
 
-/* Typography */
+/* Typography - Optimized font loading */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
 
+/* Font face fallbacks for better performance */
+@font-face {
+  font-family: 'Cinzel';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-display: swap;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* Font Families - Fallback for Crostan & Clemente */
 body {
-  font-family: 'Cormorant Garamond', serif; /* Clemente fallback */
+  font-family: 'Cormorant Garamond', serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* Clemente fallback */
   font-weight: 400;
   line-height: 1.6;
   color: var(--primary-dark);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive grid improvements */
+@media (max-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .hero-content {
+    padding: 4rem 0 !important;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem !important;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,22 +89,26 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Art Deco Typography Styles */
 .hero-title {
-  font-size: 4.5rem;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 700;
   background: var(--gradient-gold);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  line-height: 1.1;
+  margin-bottom: 1rem;
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   font-weight: 600;
   color: var(--primary-gold);
   text-align: center;
   margin-bottom: 2rem;
   position: relative;
+  line-height: 1.2;
 }
 
 .section-title::after {
@@ -214,9 +266,22 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Layout Styles */
 .container {
-  max-width: 1440px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
+}
+
+/* Responsive container padding */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 3rem;
+  }
 }
 
 .hero-section {
@@ -246,8 +311,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 3rem 0;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 5rem 0;
+  }
 }
 
 .section:nth-child(even) {
